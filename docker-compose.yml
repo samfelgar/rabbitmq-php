@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  php:
+    build: .
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    networks:
+      - rabbitmq
+    command: ["tail", "-f", "/dev/null"]
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: 'rabbitmq'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+networks:
+  rabbitmq:
+    driver: bridge
+volumes:
+  rabbitmq: {}
