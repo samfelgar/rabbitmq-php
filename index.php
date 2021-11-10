@@ -17,7 +17,9 @@ if (empty($data)) {
     $data = 'info: Hello World!';
 }
 
-$message = new AMQPMessage($data);
+$message = new AMQPMessage($data, [
+    'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT,
+]);
 
 $channel->basic_publish($message, 'logs');
 
