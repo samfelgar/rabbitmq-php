@@ -20,7 +20,7 @@ $callback = function ($msg) {
     echo ' [x] ', $msg->body, "\n";
 };
 
-$channel->basic_consume($queue, '', false, true, false, false, $callback);
+$channel->basic_consume($queue, '', false, false, false, false, $callback);
 
 while ($channel->is_open()) {
     $channel->wait();
